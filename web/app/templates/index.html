@@ -50,25 +50,23 @@
 
   <script type=text/javascript>
     $(function() {
-      $('a#calculate').bind('click', function() {
+      $('input#calculate1').bind('click', function() {
         $.getJSON($SCRIPT_ROOT + '/_add_numbers', {
-          a: $('input[name="a"]').val(),
-          b: $('input[name="b"]').val()
+          a: $('input[name="c"]').val(),
+          b: $('input[name="d"]').val()
         }, function(data) {
-          $("#result").text(data.result);
+          $("#result1").text(data.result);
         });
         return false;
       });
     });
   </script>
   <h1>jQuery Example</h1>
-  <p><input type=text size=5 name=a> +
-     <input type=text size=5 name=b> =
-     <span id=result>?</span>
-  <p><a href=# id=calculate>calculate server side</a>
-  <p><input type="button" onclick="location.href='http://google.com';" value="Calculate" />
-
-  
+  <p><input type=text size=5 name=c> +
+     <input type=text size=5 name=d> =
+     <span id=result1>?</span>
+  <p><input id=calculate1 type=image src="http://ecx.images-amazon.com/images/I/51rR8RV5DHL._SY300_.jpg">
+ 
 {% endblock body %}
 
 {% block js %}
