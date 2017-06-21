@@ -22,12 +22,11 @@
   </section>
 
 
-  <div class="content">
-    {% if products %}
-      <table align="center">
-         <tr>
+  <div class="container">
+    <div class="row">
+      {% if products %}
          {% for product in products %}
-           <td>
+           <div class='col-sm-1'>
              <input id=product
                     type=image
                     name=display 
@@ -35,43 +34,26 @@
                     width=72
                     height=72
                     value={{product['asin']}}
-             /> 
-           </td>
+             />
+           </div>
          {% endfor%}
-         </tr>
-      </table>
-    {%endif%}
+      {%endif%}
+    </div>
   </div>
 
-<div class="container">
-<div class="row">
-  <div class='col'>
-    <span id=prdct_image></span><br>
+  <div class="container">
+    <div class="row">
+      <div class='col-sm-4'>
+        <span id=prdct_image></span><br>
+      </div>
+      <div class='col-sm-8'>
+        <span id=prdct_title></span><br><br>
+        <span id=prdct_brand></span><br><br>
+        <span id=prdct_price></span><br><br>
+        <span id=prdct_description></span><br><br>
+      </div>
+    </div>
   </div>
-  <div class='col'>
-    <span id=prdct_title></span><br>
-    <span id=prdct_brand></span>
-    <span id=prdct_price></span><br>
-    <span id=prdct_description></span><br>
-  </div>
-</div>
-</div>
-
-  <table align="center" width="600" cellspacing="0" cellpadding="0">
-    <tr>
-      <td valign="top" width=40% RowSpan=3><span id=prdct_image></span></td>
-      <th colspan=2><span id=prdct_title></span></th>
-    </tr>
-    <tr>
-      <td><span id=prdct_brand></span></td>
-      <td><span id=prdct_price></span></td>
-    </tr>
-    <tr>
-      <td valign="top" colspan=2><span id=prdct_description></span></td>
-    </tr>
-  </table>
-
-
 
 {% endblock body %}
 
@@ -97,6 +79,7 @@
           var image = document.createElement("IMG");
           image.src=data.imUrl;
           image.height=200;
+          image.align='center';
           $("#prdct_image").html(image)
         });
         return false;

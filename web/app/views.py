@@ -34,18 +34,8 @@ def index():
         form=form,
         products=result)
 
-
-@app.route("/display", methods=["POST"])
-def display():
-    # Get json data that came with the request
-    data = flask.request.json
-    print(data)
-    #return result as json
-    # Put the result in a nice dict so we can send it as json
-    results = {"result": 1}
-    return flask.jsonify(results)
-
-@app.route('/_add_numbers')
+@app.route('/display')
 def add_numbers():
     a = request.args.get('a', 0, type=str)
-    return jsonify(result=a)
+    result = search_product_by_asin(a)
+    return jsonify(result)
