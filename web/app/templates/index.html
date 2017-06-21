@@ -1,0 +1,98 @@
+
+{% extends 'base.html' %}
+
+{% block body %}
+  <section class="header">
+    <div class="content">
+      <form method="POST">
+        {{ form.hidden_tag() }}
+        <div class="row">
+          <table align="center">
+            <tr>
+              <td>Baby Stuff</td>
+              <td>{{ form.keywords() }}</td>
+              <td><button type="submit" class="button-primary">Search</button></td>
+            </tr>
+          </table>
+        </div>
+      </form>
+
+    </div>
+
+  </section>
+
+
+  <div class="content">
+    {% if products %}
+      <table align="center">
+         <tr>
+         {% for product in products %}
+           <td>
+             <input type="image" 
+                    name="display" 
+                    src='{{product['imUrl']}}' 
+                    width=80 
+                    height="80"
+                    onclick="getDisplay({{product}})"
+             /> 
+           </td>
+         {% endfor%}
+         </tr>
+      </table>
+    {%endif%}
+  </div>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+  <script type=text/javascript>
+    $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+  </script>
+
+  <script type=text/javascript>
+    $(function() {
+      $('a#calculate').bind('click', function() {
+        $.getJSON($SCRIPT_ROOT + '/_add_numbers', {
+          a: $('input[name="a"]').val(),
+          b: $('input[name="b"]').val()
+        }, function(data) {
+          $("#result").text(data.result);
+        });
+        return false;
+      });
+    });
+  </script>
+  <h1>jQuery Example</h1>
+  <p><input type=text size=5 name=a> +
+     <input type=text size=5 name=b> =
+     <span id=result>?</span>
+  <p><a href=# id=calculate>calculate server side</a>
+  <p><input type="button" onclick="location.href='http://google.com';" value="Go to Google" />
+
+  
+{% endblock body %}
+
+{% block js %}
+
+  <script type="text/javascript">
+     function getDisplay(prodcut){
+       $.ajax({
+         type: "POST",
+         contentType: "application/json; charset=utf-8",
+         url: "/display",
+         dataType: "json",
+         async: true,
+         data: product,
+         success: function (product) {
+           var img = document.createElement("img");
+           img.src = product["imUrl"];
+           // This next line will just add it to the <body> tag
+           document.body.appendChild(img);
+         },
+         error: function (result) {
+         }
+       })
+     }
+
+  </script>
+{% endblock js %}
+

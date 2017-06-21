@@ -1,0 +1,87 @@
+
+{% extends 'base.html' %}
+
+{% block body %}
+  <section class="header">
+    <div class="content">
+      <form method="POST">
+        {{ form.hidden_tag() }}
+        <div class="row">
+          <table align="center">
+            <tr>
+              <td>Baby Stuff</td>
+              <td>{{ form.keywords() }}</td>
+              <td><button type="submit" class="button-primary">Search</button></td>
+            </tr>
+          </table>
+          <span>{{ form.keywords() }}</span>
+        </div>
+      </form>
+
+    </div>
+
+
+    <div class="container">
+    	<div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <div id="imaginary_container"> 
+                    <div class="input-group stylish-input-group">
+                        <input type="text" class="form-control"  placeholder="Search" >
+                        <span class="input-group-addon">
+                            <button type="submit">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>  
+                        </span>
+                    </div>
+                </div>
+            </div>
+    	</div>
+    </div>
+
+
+  </section>
+
+
+  <div class="content">
+    {% if prediction %}
+      <div class="row">
+        <div class="four columns">
+          <table align="center">
+            <tr>
+            <th colspan="2">{{prediction["title"]}}</th>
+            </tr>
+
+            <tr>
+            <th colspan="2"><img src="{{prediction["imUrl"]}}"/></th>
+            </tr>
+
+            <tr>
+            <td colspan="2">{{prediction["description"]}}</td>
+            </tr>
+            <tr>
+              <th>Brand</th>
+              <td>{{prediction["brand"]}}</td> 
+            </tr>
+            <tr>
+              <th>Price</th>
+              <td>${{prediction["price"]}}</td> 
+            </tr>
+          </table>
+        </div>
+
+
+        <div class="six columns">
+         <!--  Your Chart or any other form of visualizations -->
+         <div id="chart"></div>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+{% endblock body %}
+
+{% block js %}
+  <script type="text/javascript">
+  // your JS Code
+  // Your D3 code could be here
+  </script>
+{% endblock js %}
