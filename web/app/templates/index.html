@@ -43,33 +43,32 @@
     {%endif%}
   </div>
 
+<div class="container">
+<div class="row">
+  <div class='col'>
+    <span id=prdct_image></span><br>
+  </div>
+  <div class='col'>
+    <span id=prdct_title></span><br>
+    <span id=prdct_brand></span>
+    <span id=prdct_price></span><br>
+    <span id=prdct_description></span><br>
+  </div>
+</div>
+</div>
 
-  <table width="600" cellspacing="0" cellpadding="0">
-     <tr>
-       <td width="200">
-         <tr>
-           <td>image<td>
-           <td><span id=prdct_image></span></td>
-         </tr>
-       </td>
-       <td>
-         <tr>
-           <td colspan=2><span id=prdct_title></span></td>
-         </tr>
-         <tr>
-           <td>brand</td>
-           <td><span id=prdct_brand></span></td>
-         </tr>
-         <tr>
-           <td>price</td>
-           <td><span id=prdct_price></span></td>
-         </tr>
-         <tr>
-           <td>description</td>
-           <td><span id=prdct_description></span></td>
-         </tr>
-       </td>
-     </tr>
+  <table align="center" width="600" cellspacing="0" cellpadding="0">
+    <tr>
+      <td valign="top" width=40% RowSpan=3><span id=prdct_image></span></td>
+      <th colspan=2><span id=prdct_title></span></th>
+    </tr>
+    <tr>
+      <td><span id=prdct_brand></span></td>
+      <td><span id=prdct_price></span></td>
+    </tr>
+    <tr>
+      <td valign="top" colspan=2><span id=prdct_description></span></td>
+    </tr>
   </table>
 
 
@@ -87,14 +86,18 @@
   <script type=text/javascript>
     $(function() {
       $('input#product').bind('click', function() {
-        $.getJSON($SCRIPT_ROOT + '/_add_numbers', {
+        $.getJSON($SCRIPT_ROOT + '/display', {
           a: $(this).val()
         }, function(data) {
           $("#prdct_title").text(data.title);
           $("#prdct_description").text(data.description);
-          $("#prdct_brand").text(data.brand);
-          $("#prdct_price").text(data.price);
-          $("#prdct_image").append("<img id='theImg' src='"+data.imUrl+"'/>")
+          $("#prdct_brand").text("brand: "+data.brand);
+          $("#prdct_price").text("price: $"+data.price);
+          <!--$("#prdct_image").append("<img id='theImg' src='"+data.imUrl+"'/>")-->
+          var image = document.createElement("IMG");
+          image.src=data.imUrl;
+          image.height=200;
+          $("#prdct_image").html(image)
         });
         return false;
       });
