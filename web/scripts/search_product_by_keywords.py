@@ -9,13 +9,13 @@ def search_product_by_keywords(keywords):
 
     by_title = selector.select("Product")\
                        .where("_.title =~ '.* {0} .*'".format(keywords))\
-                       .limit(10)
+                       .limit(12)
     selected += list(by_title)
 
-    if len(selected)<10:
+    if len(selected)<12:
         by_dscrp = selector.select("Product")\
                            .where("_.description =~ '.* {0} .*'".format(keywords))\
-                           .limit(10-len(selected))
+                           .limit(12-len(selected))
 
         selected += list(by_dscrp)
 
