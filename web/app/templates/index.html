@@ -66,7 +66,7 @@
      <input type=text size=5 name=b> =
      <span id=result>?</span>
   <p><a href=# id=calculate>calculate server side</a>
-  <p><input type="button" onclick="location.href='http://google.com';" value="Go to Google" />
+  <p><input type="button" onclick="location.href='http://google.com';" value="Calculate" />
 
   
 {% endblock body %}
@@ -74,25 +74,6 @@
 {% block js %}
 
   <script type="text/javascript">
-     function getDisplay(prodcut){
-       $.ajax({
-         type: "POST",
-         contentType: "application/json; charset=utf-8",
-         url: "/display",
-         dataType: "json",
-         async: true,
-         data: product,
-         success: function (product) {
-           var img = document.createElement("img");
-           img.src = product["imUrl"];
-           // This next line will just add it to the <body> tag
-           document.body.appendChild(img);
-         },
-         error: function (result) {
-         }
-       })
-     }
-
   </script>
 {% endblock js %}
 
