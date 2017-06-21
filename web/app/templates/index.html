@@ -28,12 +28,12 @@
          <tr>
          {% for product in products %}
            <td>
-             <input id=calculate1
+             <input id=product
                     type=image
                     name=display 
                     src={{product['imUrl']}}
-                    width=80 
-                    height=80
+                    width=72
+                    height=72
                     value={{product['asin']}}
              /> 
            </td>
@@ -43,8 +43,40 @@
     {%endif%}
   </div>
 
-  <span id=result1>?</span>
 
+  <table width="600" cellspacing="0" cellpadding="0">
+     <tr>
+       <td width="200">
+         <tr>
+           <td>image<td>
+           <td><span id=prdct_image></span></td>
+         </tr>
+       </td>
+       <td>
+         <tr>
+           <td colspan=2><span id=prdct_title></span></td>
+         </tr>
+         <tr>
+           <td>brand</td>
+           <td><span id=prdct_brand></span></td>
+         </tr>
+         <tr>
+           <td>price</td>
+           <td><span id=prdct_price></span></td>
+         </tr>
+         <tr>
+           <td>description</td>
+           <td><span id=prdct_description></span></td>
+         </tr>
+       </td>
+     </tr>
+  </table>
+
+
+
+{% endblock body %}
+
+{% block js %}
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
@@ -54,37 +86,20 @@
 
   <script type=text/javascript>
     $(function() {
-      $('input#calculate1').bind('click', function() {
+      $('input#product').bind('click', function() {
         $.getJSON($SCRIPT_ROOT + '/_add_numbers', {
           a: $(this).val()
         }, function(data) {
-          $("#result1").text(data.result);
+          $("#prdct_title").text(data.title);
+          $("#prdct_description").text(data.description);
+          $("#prdct_brand").text(data.brand);
+          $("#prdct_price").text(data.price);
+          $("#prdct_image").append("<img id='theImg' src='"+data.imUrl+"'/>")
         });
         return false;
       });
     });
   </script>
-  <h1>jQuery Example</h1>
-     <span id=result1>?</span>
-  <p><input id=calculate1 
-            type=image 
-            src="http://ecx.images-amazon.com/images/I/51rR8RV5DHL._SY300_.jpg"
-            height=80
-            value=51rR8RV5DHL
-     >
 
-  <p><input id=calculate1 
-            type=image 
-            src="http://ecx.images-amazon.com/images/I/51rR8RV5DHL._SY300_.jpg"
-            height=80
-            value=112
-     >
-
-{% endblock body %}
-
-{% block js %}
-
-  <script type="text/javascript">
-  </script>
 {% endblock js %}
 
