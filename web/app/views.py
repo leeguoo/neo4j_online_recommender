@@ -47,7 +47,5 @@ def display():
 
 @app.route('/_add_numbers')
 def add_numbers():
-    a = request.args.get('a', 0, type=int)
-    b = request.args.get('b', 0, type=int)
-    print(a,b)
-    return jsonify(result=a + b)
+    a = request.args.get('a', 0, type=str)
+    return jsonify(result=a)

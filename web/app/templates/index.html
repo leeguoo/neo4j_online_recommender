@@ -28,12 +28,13 @@
          <tr>
          {% for product in products %}
            <td>
-             <input type="image" 
-                    name="display" 
-                    src='{{product['imUrl']}}' 
+             <input id=calculate1
+                    type=image
+                    name=display 
+                    src={{product['imUrl']}}
                     width=80 
-                    height="80"
-                    onclick="getDisplay({{product}})"
+                    height=80
+                    value={{product['asin']}}
              /> 
            </td>
          {% endfor%}
@@ -41,6 +42,9 @@
       </table>
     {%endif%}
   </div>
+
+  <span id=result1>?</span>
+
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
@@ -52,8 +56,7 @@
     $(function() {
       $('input#calculate1').bind('click', function() {
         $.getJSON($SCRIPT_ROOT + '/_add_numbers', {
-          a: $('input[name="c"]').val(),
-          b: $('input[name="d"]').val()
+          a: $(this).val()
         }, function(data) {
           $("#result1").text(data.result);
         });
@@ -62,11 +65,21 @@
     });
   </script>
   <h1>jQuery Example</h1>
-  <p><input type=text size=5 name=c> +
-     <input type=text size=5 name=d> =
      <span id=result1>?</span>
-  <p><input id=calculate1 type=image src="http://ecx.images-amazon.com/images/I/51rR8RV5DHL._SY300_.jpg">
- 
+  <p><input id=calculate1 
+            type=image 
+            src="http://ecx.images-amazon.com/images/I/51rR8RV5DHL._SY300_.jpg"
+            height=80
+            value=51rR8RV5DHL
+     >
+
+  <p><input id=calculate1 
+            type=image 
+            src="http://ecx.images-amazon.com/images/I/51rR8RV5DHL._SY300_.jpg"
+            height=80
+            value=112
+     >
+
 {% endblock body %}
 
 {% block js %}
