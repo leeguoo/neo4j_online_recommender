@@ -2,25 +2,27 @@
 {% extends 'base.html' %}
 
 {% block body %}
-  <section class="header">
-    <div class="content">
-      <form method="POST">
-        {{ form.hidden_tag() }}
-        <div class="row">
-          <table align="center">
-            <tr>
-              <td>Baby Stuff</td>
-              <td>{{ form.keywords() }}</td>
-              <td><button type="submit" class="button-primary">Search</button></td>
-            </tr>
-          </table>
-        </div>
-      </form>
+
+  <div class="container">
+    <form method="POST">
+    {{ form.hidden_tag() }}
+    <div class="row">
+      <div class="col-sm-4">
+        <h2>Baby Stuff</h2>
+      </div>
+
+      <div class="col-sm-6"> 
+        <p>{{ form.keywords() }}</p>
+        <input id="keywords" name="keywords" type=text style="width:500px">
+      </div>
+
+      <div class="col-sm-2">
+        <button id="submit_button" type="submit" class="button-primary">Search</button>
+      </div>
 
     </div>
-
-  </section>
-
+    </form>
+  </div>
 
   <div class="container">
     <div class="row">
@@ -40,6 +42,8 @@
       {%endif%}
     </div>
   </div>
+
+  <br><br><br>
 
   <div class="container">
     <div class="row">
