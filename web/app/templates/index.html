@@ -3,27 +3,36 @@
 
 {% block body %}
 
+  <!--search bar-->
   <div class="container">
-    <form method="POST">
-    {{ form.hidden_tag() }}
+    <!--form method="POST"-->
+    <!--{{ form.hidden_tag() }}-->
     <div class="row">
       <div class="col-sm-4">
         <h2>Baby Stuff</h2>
       </div>
-
-      <div class="col-sm-6"> 
-        <p>{{ form.keywords() }}</p>
-        <input id="keywords" name="keywords" type=text style="width:500px">
-      </div>
-
-      <div class="col-sm-2">
-        <button id="submit_button" type="submit" class="button-primary">Search</button>
-      </div>
-
     </div>
-    </form>
+    <div class="row">
+      <div class="col-sm-2"> 
+        <!--{{ form.keywords() }}-->
+        <input name="keywords" type=text style="width:200px">
+      </div>
+      <div class="col-sm-2">
+        <button id="search" type="submit" class="button-primary" onclick="KWSearch()">Search</button>
+      </div>
+      <div class="col-sm-4">
+      </div>
+      <div clss="col-sm-4">
+        <!--button id="recommend" type=submit class="button-primary" onclick="$.ajax({url:'/recommend'})">New Recommendations</button-->
+      </div>
+    </div>
+    <!--/form-->
   </div>
 
+
+<button id="recommend" type=submit class="button-primary" onclick="$.ajax({url:'/recommend'})">New Recommendations</button>
+
+  <!--recommendations-->
   <div class="container">
     <div class="row">
       {% if products %}
@@ -43,8 +52,9 @@
     </div>
   </div>
 
-  <br><br><br>
+  <br><br><br><br>
 
+  <!--display of products-->
   <div class="container">
     <div class="row">
       <div class='col-sm-4'>
@@ -69,6 +79,25 @@
     $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
   </script>
 
+
+  <!--search by keywords-->
+  <script type=text/javascript>
+    function KWSearch(){
+      var keywords = $('input[name="keywords"]').val()
+      $.ajax({
+            {
+              type: 'POST',
+              url: "/",
+              dataType:'json',
+              data: JSON.stringify( { "message" : "didyoureceive?" } ),
+              success: function(data) {console.log(data)}
+            }
+            })
+     }
+
+  </script>
+
+  <!--get product details and display-->
   <script type=text/javascript>
     $(function() {
       $('input#product').bind('click', function() {
@@ -79,7 +108,6 @@
           $("#prdct_description").text(data.description);
           $("#prdct_brand").text("brand: "+data.brand);
           $("#prdct_price").text("price: $"+data.price);
-          <!--$("#prdct_image").append("<img id='theImg' src='"+data.imUrl+"'/>")-->
           var image = document.createElement("IMG");
           image.src=data.imUrl;
           image.height=200;
