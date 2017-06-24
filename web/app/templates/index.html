@@ -1,100 +1,11 @@
 
 {% extends 'base.html' %}
 
-{% block body %}
-
-  <!--search bar-->
-  <div class="container">
-    <!--form method="POST"-->
-    <!--{{ form.hidden_tag() }}-->
-    <div class="row">
-      <div class="col-sm-4">
-        <h2>Baby Stuff</h2>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-2"> 
-        <!--{{ form.keywords() }}-->
-        <input name="keywords" type=text style="width:200px">
-      </div>
-      <div class="col-sm-2">
-        <button id="search" type="submit" class="button-primary" onclick="KWSearch()">Search</button>
-      </div>
-      <div class="col-sm-4">
-      </div>
-      <div clss="col-sm-4">
-        <!--button id="recommend" type=submit class="button-primary" onclick="$.ajax({url:'/recommend'})">New Recommendations</button-->
-      </div>
-    </div>
-    <!--/form-->
-  </div>
-
-
-<button id="recommend" type=submit class="button-primary" onclick="$.ajax({url:'/recommend'})">New Recommendations</button>
-
-  <!--recommendations-->
-  <div class="container">
-    <div class="row">
-      {% if products %}
-         {% for product in products %}
-           <div class='col-sm-1'>
-             <input id=product
-                    type=image
-                    name=display 
-                    src={{product['imUrl']}}
-                    width=72
-                    height=72
-                    value={{product['asin']}}
-             />
-           </div>
-         {% endfor%}
-      {%endif%}
-    </div>
-  </div>
-
-  <br><br><br><br>
-
-  <!--display of products-->
-  <div class="container">
-    <div class="row">
-      <div class='col-sm-4'>
-        <span id=prdct_image></span><br>
-      </div>
-      <div class='col-sm-8'>
-        <span id=prdct_title></span><br><br>
-        <span id=prdct_brand></span><br><br>
-        <span id=prdct_price></span><br><br>
-        <span id=prdct_description></span><br><br>
-      </div>
-    </div>
-  </div>
-
-{% endblock body %}
-
 {% block js %}
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-
   <script type=text/javascript>
     $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
-  </script>
-
-
-  <!--search by keywords-->
-  <script type=text/javascript>
-    function KWSearch(){
-      var keywords = $('input[name="keywords"]').val()
-      $.ajax({
-            {
-              type: 'POST',
-              url: "/",
-              dataType:'json',
-              data: JSON.stringify( { "message" : "didyoureceive?" } ),
-              success: function(data) {console.log(data)}
-            }
-            })
-     }
-
   </script>
 
   <!--get product details and display-->
@@ -120,4 +31,79 @@
   </script>
 
 {% endblock js %}
+
+
+{% block body %}
+
+  <!--search bar-->
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4">
+        <h2>Baby Stuff</h2>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-sm-4">
+      <form name="sform" method="post" action="\">
+        {{ sform.hidden_tag() }}
+          {{ sform.keywords() }}
+          <button name="search" type="submit" class="button-primary">Search</button>
+      </form>
+      </div>
+
+      <div class="col-sm-4">
+      </div>
+
+      <div class="col-sm-4">
+      <form name="rform" method="post" action="\recommend">
+        {{ rform.hidden_tag() }}
+          <button name="recommend" type="submit" class="button-primary">New Recommendations</button>
+      </form>
+      </div>
+    </div>
+  </div>
+
+<br>
+
+{% if products %}
+  <!--recommendations-->
+  <div class="container">
+    <div class="row">
+	
+         {% for product in products %}
+           <div class='col-sm-2'>
+             <input id=product
+                    type=image
+                    name=display 
+                    src={{product['imUrl']}}
+                    width=120
+                    height=120
+                    value={{product['asin']}}
+             />
+           </div>
+         {% endfor%}
+      {%endif%}
+    </div>
+  </div>
+
+  <br><br>
+
+  <!--display of products-->
+  <div class="container">
+    <div class="row">
+      <div class='col-sm-4'>
+        <span id=prdct_image></span><br>
+      </div>
+      <div class='col-sm-8'>
+        <span id=prdct_title></span><br><br>
+        <span id=prdct_brand></span><br><br>
+        <span id=prdct_price></span><br><br>
+        <span id=prdct_description></span><br><br>
+      </div>
+    </div>
+  </div>
+
+{% endblock body %}
 
