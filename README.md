@@ -10,7 +10,7 @@ With these assumptions, the model well catches the important features of the tar
 
 ## Data and Database
 
-The data are from xxx. They are stored in a Neo4j graph database. 
+The data are from (https://jmcauley.ucsd.edu/data/amazon/). They are stored in a Neo4j graph database. 
 
 ## Model
 
@@ -24,4 +24,4 @@ The web app was built with Flask.
 
 ## Demo
 
-[![Everything Is AWESOME](https://github.com/leeguoo/neo4j_online_recommender/blob/master/image/screen_shot_recommender.png?raw=true)](https://youtu.be/NSiL2jWYr54)
+[![Demo](https://github.com/leeguoo/neo4j_online_recommender/blob/master/image/screen_shot_recommender.png?raw=true)](https://youtu.be/NSiL2jWYr54)
