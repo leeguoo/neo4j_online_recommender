@@ -3,4 +3,4 @@
 
 
 
-[![Everything Is AWESOME](http://i.imgur.com/Ot5DWAW.png)](https://youtu.be/NSiL2jWYr54)
+[![Everything Is AWESOME](https://github.com/leeguoo/neo4j_online_recommender/blob/master/image/screen_shot_recommender.png?raw=true)](https://youtu.be/NSiL2jWYr54)
